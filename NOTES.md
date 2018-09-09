@@ -11,11 +11,12 @@ Leading 1 (one) is for negative.
 ### How to convert positive to negative?
 1. Invert bits
 2. Add 1 bit
-
+```
 For example, 0111 is 7.
 Inverting: 1000
 Increment: 1001
 
+Some numbers of 4-bit signed range
 1000 -> -8
 1100 -> -4
 1110 -> -2
@@ -23,3 +24,4 @@ Increment: 1001
 0000 -> 0
 0001 -> 1
 0111 -> 7
+```
