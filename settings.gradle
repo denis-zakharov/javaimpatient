@@ -1,0 +1,4 @@
+rootProject.name = 'javaimpatient'
+
+include 'examples'
+include 'exercises'
