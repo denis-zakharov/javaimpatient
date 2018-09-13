@@ -27,22 +27,36 @@ Some numbers of 4-bit signed range
 ```
 
 ## Floating point numbers
-S * M * B^q, where
-* S is a sign of mantissa (significant digits);
-* M is a mantissa;
-* B is a base (10 is for decimals);
-* Q is an order of number;
-```75.38 = 0.7538 * 10^2 or 7538 * 10^-2```
+[JVM floating-point types](https://docs.oracle.com/javase/specs/jvms/se10/html/jvms-2.html#jvms-2.3.2)
+
+s ⋅ m ⋅ 2^(e − N + 1), where
+* s is +1 or -1 (sign);
+* m < 2^N (mantissa);
+* Emin <= e <= Emax (order):
+    * Emin = -(2^(K-1) - 2),
+    * Emax = 2^(K-1) - 1.
+
+Parameter|	float|	float-extended-exponent|	double|	double-extended-exponent
+---|---|---|---|---
+N|	24|	24|	53|	53
+K|	8|	≥ 11|	11	|≥ 15
+Emax |	+127	| ≥ +1023 |	+1023	| ≥ +16383
+Emin |	-126 | 	≤ -1022	| -1022 | ≤ -16382
+
+Each of the four value sets includes not only the finite nonzero values that are ascribed to it above, but also the five values positive zero, negative zero, positive infinity, negative infinity, and NaN.
+
+### Double value type (64-bit) in IEEE 754
+
+63 (1 bit)| 62 <--- 52 (11 bit) | 51 <--- 0 (52 bit)
+----------|---------------------|-------------------
+Sign      | Order               | Mantissa
+
 
 ### IEEE 754: mantissa normalization
-Do shift of a point until the most significant bit is not equal 1. The highest bit is not written; it is implicit.
-3           | 62                        52  | 51           0
------------ | ----------------------------- | --------------
-Sign        | Order                         | Mantissa
+Normalized
 
-TODO description of conversion
-75 = 1001011
+(-1)^S x 1.M x 2^E, Emin <= E <= Emax
 
-0.38 = 0110000101000111101011100001010001111010111000
+Denormalized
 
-75.38 = 1001011.0110000101000111101011100001010001111010111000
+(-1)^S x 0.M x 2^E, E = Emin - 1
