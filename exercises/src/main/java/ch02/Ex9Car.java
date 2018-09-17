@@ -23,17 +23,17 @@ class Car {
     }
 
     double move(double distance) {
+        double possibleDistance = distance;
         double consumptionForMove = distance / fuelConsumptionKmOnLiter;
         if (currentCapacity > consumptionForMove) {
-            position += distance;
+            position += possibleDistance;
             currentCapacity -= consumptionForMove;
-            return distance;
         } else {
-            double possibleDistance = currentCapacity * fuelConsumptionKmOnLiter;
+            possibleDistance = currentCapacity * fuelConsumptionKmOnLiter;
             position += possibleDistance;
             currentCapacity = 0;
-            return possibleDistance;
         }
+        return possibleDistance;
     }
 }
 
