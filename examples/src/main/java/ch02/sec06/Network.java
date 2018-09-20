@@ -14,6 +14,9 @@ public class Network {
         public void deactivate() {
             members.remove(this);
         }
+        public void deactivateLong() {
+            Network.this.members.remove(this);
+        }
 
         public void addFriend(Member newFriend) {
             friends.add(newFriend);
