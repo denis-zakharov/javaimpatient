@@ -19,5 +19,6 @@ public class Ex06SquareSequence {
         for (int i = 0; i < 10; i++) {
             System.out.println(squareSequence.next());
         }
+        System.out.println(squareSequence.hasNext());
     }
 }
