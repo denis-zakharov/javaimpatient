@@ -11,16 +11,17 @@ class Greeter implements Runnable {
 
     @Override
     public void run() {
-        while (n>0) {
-            System.out.println(n + " Hello, " + target);
-            n--;
+        int counter = n;
+        while (counter>0) {
+            System.out.println(counter + " Hello, " + target);
+            counter--;
         }
     }
 }
 
 public class Ex09Greeter {
     public static void main(String[] args) throws InterruptedException {
-        Runnable r1 = new Greeter(10, "firstTarget");
+        Runnable r1 = new Greeter(100, "firstTarget");
         Runnable r2 = new Greeter(20, "secondTarget");
         Thread t1 = new Thread(r1);
         Thread t2 = new Thread(r2);
