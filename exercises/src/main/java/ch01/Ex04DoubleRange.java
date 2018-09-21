@@ -8,7 +8,5 @@ public class Ex04DoubleRange {
         System.out.println("My minimal Double: " + minDouble);
 
         System.out.println("Maximal Double: " + Double.MAX_VALUE);
-        //TODO calculate max double
-        //System.out.println("My Maximal Double: " + maxValue);
     }
 }

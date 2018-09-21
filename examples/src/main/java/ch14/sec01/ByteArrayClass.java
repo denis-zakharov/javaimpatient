@@ -1,11 +1,9 @@
 package ch14.sec01;
 
+import javax.tools.SimpleJavaFileObject;
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URI;
-
-import javax.tools.SimpleJavaFileObject;
 
 public class ByteArrayClass extends SimpleJavaFileObject {
     private ByteArrayOutputStream out;
@@ -15,13 +13,12 @@ public class ByteArrayClass extends SimpleJavaFileObject {
             Kind.CLASS);
     }
     
-    public byte[] getCode() {
+    byte[] getCode() {
         return out.toByteArray();
     }
     
     @Override
-    public OutputStream openOutputStream() throws IOException {
-        // TODO Auto-generated method stub
+    public OutputStream openOutputStream() {
         out = new ByteArrayOutputStream();
         return out;
     }        

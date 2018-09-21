@@ -1,23 +1,22 @@
 package ch09.sec05;
 
+import javafx.geometry.Point2D;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-import javafx.geometry.Point2D;
-
 public class LabeledPoint implements Serializable {
     private String label;
     private transient Point2D point;
     
-    public LabeledPoint(String label, Point2D point) {
+    LabeledPoint(String label, Point2D point) {
         this.label = label;
         this.point = point;
     }
     
     public String toString() {
-        // TODO Auto-generated method stub
         return String.format("%s[label=%s,point=%s]", getClass().getName(), label, point);
     }
     

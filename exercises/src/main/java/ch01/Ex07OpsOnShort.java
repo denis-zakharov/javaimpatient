@@ -1,21 +1,21 @@
 package ch01;
 
-import java.util.Scanner;
-
 public class Ex07OpsOnShort {
-    // TODO Make this operations correct as if the numbers are unsigned short
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Input two integer numbers between 0 and 65535: ");
-        int n1 = scanner.nextInt();
-        int n2 = scanner.nextInt();
-        // 16 bit
-        short a = (short) n1;
-        short b = (short) n2;
+        //Short.MAX_VALUE 32767
+        short a = (short) 40000;
+        short b = 10000;
 
-        System.out.println("Sum: " + (a + b));
-        System.out.println("Diff: " + (a - b));
-        System.out.println("Mult: " + (a * b));
-        System.out.println("Mod: " + (a % b));
+        short c = 1000;
+        short d = 60;
+
+        short sum = (short) (a + b);
+        short diff = (short) (a - b);
+        short mult = (short) (c * d);
+        System.out.println("Sum: " + Short.toUnsignedInt(sum));
+        System.out.println("Diff: " + Short.toUnsignedInt(diff));
+        System.out.println("Mult: " + Short.toUnsignedInt(mult));
+        System.out.println("Div: " + Integer.divideUnsigned(sum, 2));
+        System.out.println("Mod: " + Integer.remainderUnsigned(sum, 3));
     }
 }
