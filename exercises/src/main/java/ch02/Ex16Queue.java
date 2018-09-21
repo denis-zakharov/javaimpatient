@@ -1,7 +1,9 @@
 package ch02;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
-class Queue<Item> {
+class Queue<Item> implements Iterable<Item> {
     private Node head; // a first node
 
     private class Node {
@@ -55,6 +57,27 @@ class Queue<Item> {
             return result;
         }
     }
+
+    public Iterator<Item> iterator() {
+        return new Iterator<Item>() {
+            Node current = head;
+
+            public boolean hasNext() {
+                return current != null && current.item != null;
+            }
+
+            public Item next() {
+                if (current == null || current.item == null) {
+                    throw new NoSuchElementException();
+                }
+                else {
+                    Item next = current.item;
+                    current = current.next;
+                    return next;
+                }
+            }
+        };
+    }
 }
 
 public class Ex16Queue {
@@ -66,6 +89,9 @@ public class Ex16Queue {
         q.add("not");
         q.add("to");
         q.add("be");
+
+        for (String s : q) System.out.println(s); // test iterator
+        System.out.println("----------");
 
         String item;
         while ((item = q.remove()) != null) {
