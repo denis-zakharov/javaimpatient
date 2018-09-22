@@ -7,8 +7,6 @@ public interface IntSequence {
         return true;
     }
 
-    ;
-
     int next() throws NoSuchElementException;
 
     static IntSequence of(int... args) {
