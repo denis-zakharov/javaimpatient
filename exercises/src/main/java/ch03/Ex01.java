@@ -4,12 +4,12 @@ class Employee implements Measurable {
     private String name;
     private double salary;
 
-    public Employee(String name, double salary) {
+    Employee(String name, double salary) {
         this.name = name;
         this.salary = salary;
     }
 
-    public String getName() {
+    String getName() {
         return name;
     }
 
@@ -21,11 +21,19 @@ class Employee implements Measurable {
     public double getMeasure() {
         return salary;
     }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "name='" + name + '\'' +
+                ", salary=" + salary +
+                '}';
+    }
 }
 
 public class Ex01 {
 
-    static double average(Measurable[] objects) {
+    private static double average(Measurable[] objects) {
         double result = 0;
         if (objects.length == 0) return result;
         for (Measurable obj : objects) {
@@ -34,7 +42,7 @@ public class Ex01 {
         return result / objects.length;
     }
 
-    static Measurable largest(Measurable[] objects) {
+    private static Measurable largest(Measurable[] objects) {
         double max = 0;
         Measurable largest = null;
         for (Measurable obj : objects) {
