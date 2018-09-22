@@ -24,8 +24,6 @@ class LabeledPoint extends Point {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         LabeledPoint that = (LabeledPoint) o;
         return Objects.equals(label, that.label);
@@ -50,7 +48,14 @@ public class Ex01Point {
 
     public static void main(String[] args) {
         LabeledPoint label = new LabeledPoint(1, 2, "Label");
+        LabeledPoint label2 = new LabeledPoint(1, 2, "Label");
+        LabeledPoint label3 = new LabeledPoint(1, 3, "Label");
         label.method();
+
+        System.out.println("label1==label2: " + label.equals(label2));
+        System.out.println("label1==label3: " + label.equals(label3));
+        System.out.println("label1(1,2,label)==point(1,2): " + label.equals(new Point(1, 2)));
+        System.out.println("point(1,2)==label1(1,2,label): " + new Point(1, 2).equals(label));
 
         // Cannot access protected fields outside class or sub-class in other package
         /*System.out.println(label.x);
