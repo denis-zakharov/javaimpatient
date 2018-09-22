@@ -3,6 +3,7 @@ package ch04;
 import ch04.point.Point;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 class LabeledPoint extends Point {
     String label;
@@ -19,6 +20,29 @@ class LabeledPoint extends Point {
      */
     public void method() {
         System.out.println(x + y); // can access public/protected fields of a parent class in other package directly
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        LabeledPoint that = (LabeledPoint) o;
+        return Objects.equals(label, that.label);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), label);
+    }
+
+    @Override
+    public String toString() {
+        return "LabeledPoint{" +
+                "label='" + label + '\'' +
+                ", x=" + x +
+                ", y=" + y +
+                '}';
     }
 }
 
