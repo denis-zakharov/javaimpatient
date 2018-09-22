@@ -2,7 +2,9 @@ package ch04;
 
 import ch02.point.Point;
 
-abstract class Shape {
+import java.util.Objects;
+
+abstract class Shape implements Cloneable {
     Point point;
 
     public Shape(Point point) {
@@ -16,7 +18,7 @@ abstract class Shape {
     abstract public Point getCenter();
 }
 
-class Circle extends Shape {
+final class Circle extends Shape {
     double radius;
 
     public Circle(Point center, double radius) {
@@ -28,9 +30,33 @@ class Circle extends Shape {
     public Point getCenter() {
         return point;
     }
+
+    @Override
+    public Circle clone() {
+        try {
+            Circle clone = (Circle) super.clone();
+            clone.point = new Point(point.getX(), point.getY());
+            return clone;
+        } catch (CloneNotSupportedException e) { // never happens; suppress in a final class
+            return null;
+        }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Circle circle = (Circle) o;
+        return Double.compare(circle.radius, radius) == 0 && circle.point.equals(point);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(radius, point);
+    }
 }
 
-class Rectangle extends Shape {
+final class Rectangle extends Shape {
     double width;
     double height;
 
@@ -44,9 +70,31 @@ class Rectangle extends Shape {
     public Point getCenter() {
         return new Point(point.getX() + width / 2, point.getY() + height / 2);
     }
+
+    @Override
+    public Rectangle clone() throws CloneNotSupportedException {
+        // WRONG IMPLEMENTATION
+        // it does a shallow copy of topLeft Point object
+        return (Rectangle) super.clone();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Rectangle rectangle = (Rectangle) o;
+        return Double.compare(rectangle.width, width) == 0 &&
+                Double.compare(rectangle.height, height) == 0 &&
+                rectangle.point.equals(point);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(width, height, point);
+    }
 }
 
-class Line extends Shape {
+final class Line extends Shape {
     Point to;
 
     public Line(Point from, Point to) {
@@ -61,4 +109,17 @@ class Line extends Shape {
 }
 
 public class Ex04Shape {
+    public static void main(String[] args) throws CloneNotSupportedException {
+        Circle circle = new Circle(new Point(0, 0), 100);
+        Circle clone = circle.clone();
+        System.out.println(circle.equals(clone)); // true
+        Objects.requireNonNull(clone).moveBy(10, 10);
+        System.out.println(circle.equals(clone)); // false, the point object in clone is changed
+
+        Rectangle rectangle = new Rectangle(new Point(0, 100), 1000, 20);
+        Rectangle rectangleShallowClone = rectangle.clone();
+        System.out.println(rectangle.equals(rectangleShallowClone)); // true
+        rectangleShallowClone.moveBy(10, 10);
+        System.out.println(rectangle.equals(rectangleShallowClone)); // true, share the same point object
+    }
 }

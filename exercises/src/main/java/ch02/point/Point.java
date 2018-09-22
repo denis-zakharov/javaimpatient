@@ -1,5 +1,7 @@
 package ch02.point;
 
+import java.util.Objects;
+
 /**
  * Object of <code>class Point</code>
  * is a representation of a Cartesian 2D-point.
@@ -37,6 +39,20 @@ public class Point {
     public void scale(double scale) {
         x *= scale;
         y *= scale;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Point point = (Point) o;
+        return Double.compare(point.x, x) == 0 &&
+                Double.compare(point.y, y) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
     }
 
     @Override
