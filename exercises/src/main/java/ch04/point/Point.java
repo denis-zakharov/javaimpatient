@@ -9,6 +9,10 @@ public class Point {
         this.y = y;
     }
 
+    public void method() {
+        System.out.println("Point method");
+    }
+
     public double getX() {
         return x;
     }

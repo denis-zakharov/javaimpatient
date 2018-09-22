@@ -10,7 +10,12 @@ class LabeledPoint extends Point {
         this.label = label;
     }
 
-    void method() {
+    /*
+    Compile-time error: when overridden method has a weaker access, e.g. `void method` instead of `public void method`
+    'method()' in 'ch04.LabeledPoint' clashes with 'method()' in 'ch04.point.Point';
+     attempting to assign weaker access privileges ('package-private'); was 'public'
+     */
+    public void method() {
         System.out.println(x + y); // can access public/protected fields of a parent class in other package directly
     }
 }
