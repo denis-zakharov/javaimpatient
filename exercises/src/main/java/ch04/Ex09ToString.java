@@ -6,7 +6,7 @@ import java.lang.reflect.Field;
 
 public class Ex09ToString {
     private static String toStringUniversal(Class<?> cls, Object obj) throws IllegalAccessException {
-        Field[] fields = cls.getDeclaredFields();
+        Field[] fields = cls.getDeclaredFields(); // including private ones
         StringBuilder fieldsString = new StringBuilder();
         for (int i = 0; i < fields.length; i++) {
             Field field = fields[i];
