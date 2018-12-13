@@ -4,10 +4,11 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URLEncoder;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.util.HashMap;
 import java.util.Map;
-
-import jdk.incubator.http.*;
 
 public class HttpClientDemo {
     public static void main(String[] args) throws URISyntaxException, IOException, InterruptedException {
@@ -17,7 +18,7 @@ public class HttpClientDemo {
                 .uri(new URI("http://horstmann.com"))
                 .GET()
                 .build();
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandler.asString());
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
         System.out.println(response.body());
         
         System.out.println("\n\n\nPOST demo");        
@@ -43,9 +44,9 @@ public class HttpClientDemo {
                 .uri(new URI("http://codecheck.it/check"))
                 .header("Accept-Charset", "UTF-8")
                 .header("Content-Type", "application/x-www-form-urlencoded")
-                .POST(HttpRequest.BodyPublisher.fromString(body.toString()))
+                .POST(HttpRequest.BodyPublishers.ofString(body.toString()))
                 .build();
-        response = client.send(request, HttpResponse.BodyHandler.asString());
+        response = client.send(request, HttpResponse.BodyHandlers.ofString());
         System.out.println(response.body());
    }
     

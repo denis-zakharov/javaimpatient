@@ -1,6 +1,6 @@
 module examples.main {
-    requires jdk.incubator.httpclient;
-    requires java.xml.ws.annotation;
+    requires java.net.http;
+    requires java.annotation;
     requires javafx.graphics;
     requires javafx.controls;
     requires java.desktop;
